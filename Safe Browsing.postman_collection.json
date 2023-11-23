@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "2c7b907c-c378-4d78-9315-6fb7a579a08d",
+		"name": "Safe Browsing",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19011405",
+		"_collection_link": "https://www.postman.com/dark-shadow-923240/workspace/safe-browsing/collection/19011405-2c7b907c-c378-4d78-9315-6fb7a579a08d?action=share&source=collection_link&creator=19011405"
+	},
+	"item": [
+		{
+			"name": "Получить информацию об актуальных списках Safe Browsing",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}{{API token}}threatLists?91b10dca-adc0-4741-a79e-0fbd45e14af2",
+					"host": [
+						"{{baseURL}}{{API token}}threatLists"
+					],
+					"query": [
+						{
+							"key": "91b10dca-adc0-4741-a79e-0fbd45e14af2",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Проверить список для URL (1)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "91b10dca-adc0-4741-a79e-0fbd45e14af2",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"threatInfo\": {\r\n    \"threatTypes\": [\"MALWARE\"],\r\n    \"platformTypes\": [\"WINDOWS\"],\r\n    \"threatEntryTypes\": [\"URL\"],\r\n    \"threatEntries\": [\r\n      {\"url\": \"https://yandex.ru/dev/safebrowsing/doc/quickstart/concepts/lookup.html\"}\r\n    ]\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}{{API token}}threatMatches:find?key=91b10dca-adc0-4741-a79e-0fbd45e14af2",
+					"host": [
+						"{{baseURL}}{{API token}}threatMatches"
+					],
+					"port": "find",
+					"query": [
+						{
+							"key": "key",
+							"value": "91b10dca-adc0-4741-a79e-0fbd45e14af2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Проверить список для URL (2)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"threatInfo\": {\r\n    \"threatTypes\": [\"MALWARE\", \"SOCIAL_ENGINEERING\"],\r\n    \"platformTypes\": [\"WINDOWS\"],\r\n    \"threatEntryTypes\": [\"URL\"],\r\n    \"threatEntries\": [\r\n      {\"url\": \"https://developer.tech.yandex.ru/services/26\"}\r\n    ]\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}{{API token}}threatMatches:find?key=91b10dca-adc0-4741-a79e-0fbd45e14af2",
+					"host": [
+						"{{baseURL}}{{API token}}threatMatches"
+					],
+					"port": "find",
+					"query": [
+						{
+							"key": "key",
+							"value": "91b10dca-adc0-4741-a79e-0fbd45e14af2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://sba.yandex.net",
+			"type": "string"
+		},
+		{
+			"key": "API token",
+			"value": "/v4/",
+			"type": "string"
+		}
+	]
+}
